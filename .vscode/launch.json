@@ -6,17 +6,17 @@
     "configurations": [
         {
             "cwd": "${workspaceFolder}",
-            "executable": "./GCC/build/temp.elf",
+            "executable": "./build/temp.elf",
             "name": "Debug-F4",
             "request": "launch",
             "type": "cortex-debug",
-            "runToEntryPoint": "main",
+            //"runToEntryPoint": "main",
             "armToolchainPath": "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.3 rel1/bin",
             "showDevDebugOutput": "vscode",
             "servertype": "openocd",
             "configFiles": [
-                "${workspaceFolder}/GCC/config/cmsis-dap.cfg",
-                "${workspaceFolder}/GCC/config/stm32f4x.cfg"
+                "interface/cmsis-dap.cfg",
+                "target/stm32f4x.cfg"
             ]
         }
 

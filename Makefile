@@ -227,7 +227,7 @@ clean:
 
 dol:
 	echo "this is a test function"  
-	openocd -f interface/cmsis-dap.cfg -f target/stm32f4x.cfg -c init -c "reset halt; wait_halt; flash write_image erase ./${BUILD_DIR}/$(TARGET).hex 0x08000000" -c reset -c shutdown
+	openocd -f interface/cmsis-dap.cfg -f target/stm32f4x.cfg -c init -c "reset halt; wait_halt; flash write_image erase ./${BUILD_DIR}/$(TARGET).bin 0x08000000" -c reset -c shutdown
 
 rebuild_run:
 	make clean
