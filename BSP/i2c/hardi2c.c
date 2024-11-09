@@ -1,0 +1,126 @@
+#include <stm32f4xx.h>
+
+#include <gpio.h>
+
+#include <hardi2c.h>
+
+// 硬件I2C初始化
+void Hard_I2C_Init()
+{
+    // 使能GPIOB时钟
+    RCC->AHB1ENR |= 1 << 1;
+    // 使能I2C1时钟
+    RCC->APB1ENR |= 1 << 21;
+    
+    // 配置I2C1引脚
+    bsp_gpio_init(GPIOB, SYS_GPIO_PIN8, SYS_GPIO_MODE_AF, SYS_GPIO_OTYPE_PP, SYS_GPIO_SPEED_FAST, SYS_GPIO_PUPD_PU);
+    bsp_gpio_init(GPIOB, SYS_GPIO_PIN9, SYS_GPIO_MODE_AF, SYS_GPIO_OTYPE_OD, SYS_GPIO_SPEED_FAST, SYS_GPIO_PUPD_PU);
+    
+    // 配置I2C1 AF
+    bsp_gpio_af_set(GPIOB, SYS_GPIO_PIN8, 4);
+    bsp_gpio_af_set(GPIOB, SYS_GPIO_PIN9, 4);
+    
+    // 配置I2C1
+    I2C1->CR1 &= ~I2C_CR1_PE;   // 关闭I2C1
+    I2C1->CR2 = 42;             // APB1时钟42M
+    I2C1->CCR = 210;            // 速率为100K
+    I2C1->TRISE = 43;           // 最大的I2C时钟周期为1000ns
+    I2C1->CR1 |= I2C_CR1_PE;    // 使能I2C1
+}
+
+// 硬件IIC读函数
+uint8_t Hard_I2C_Read(uint8_t device_address, uint8_t register_address)
+{
+    uint8_t data;
+
+    // 生成起始条件
+    I2C1->CR1 |= I2C_CR1_START;
+    while (!(I2C1->SR1 & I2C_SR1_SB));  // 等待起始条件生成完毕
+
+    // 发送从设备地址和写命令
+    I2C1->DR = device_address << 1;
+    while (!(I2C1->SR1 & I2C_SR1_ADDR));  // 等待地址发送完毕
+    (void)I2C1->SR2;  // 清除ADDR标志
+
+    // 发送寄存器地址
+    I2C1->DR = register_address;
+    while (!(I2C1->SR1 & I2C_SR1_TXE));  // 等待数据寄存器空
+
+    // 生成重复起始条件
+    I2C1->CR1 |= I2C_CR1_START;
+    while (!(I2C1->SR1 & I2C_SR1_SB));  // 等待起始条件生成完毕
+
+    // 发送从设备地址和读命令
+    I2C1->DR = (device_address << 1) | 1;
+    while (!(I2C1->SR1 & I2C_SR1_ADDR));  // 等待地址发送完毕
+    I2C1->CR1 &= ~I2C_CR1_ACK;  // 禁用ACK
+    (void)I2C1->SR2;  // 清除ADDR标志
+
+    // 读取数据
+    while (!(I2C1->SR1 & I2C_SR1_RXNE));  // 等待数据接收完毕
+    data = I2C1->DR;
+
+    // 生成停止条件
+    I2C1->CR1 |= I2C_CR1_STOP;
+
+    return data;
+}
+
+// 硬件IIC写函数
+void Hard_I2C_Write(uint8_t device_address, uint8_t register_address, uint8_t data)
+{
+    // 生成起始条件
+    I2C1->CR1 |= I2C_CR1_START;
+    while (!(I2C1->SR1 & I2C_SR1_SB));  // 等待起始条件生成完毕
+
+    // 发送从设备地址和写命令
+    I2C1->DR = device_address << 1;
+    while (!(I2C1->SR1 & I2C_SR1_ADDR));  // 等待地址发送完毕
+    (void)I2C1->SR2;  // 清除ADDR标志
+
+    // 发送寄存器地址
+    I2C1->DR = register_address;
+    while (!(I2C1->SR1 & I2C_SR1_TXE));  // 等待数据寄存器空
+
+    // 发送数据
+    I2C1->DR = data;
+    while (!(I2C1->SR1 & I2C_SR1_TXE));  // 等待数据寄存器空
+
+    // 生成停止条件
+    I2C1->CR1 |= I2C_CR1_STOP;
+}
+
+// 硬件IIC连续写函数
+void Hard_I2C_Write_Multiple(uint8_t device_address, uint8_t register_address, uint8_t* data, uint16_t length)
+{
+    // 生成起始条件
+    I2C1->CR1 |= I2C_CR1_START;
+    while (!(I2C1->SR1 & I2C_SR1_SB));  // 等待起始条件生成完毕
+
+    // 发送从设备地址和写命令
+    I2C1->DR = device_address << 1;
+    while (!(I2C1->SR1 & I2C_SR1_ADDR));  // 等待地址发送完毕
+    (void)I2C1->SR2;  // 清除ADDR标志
+
+    // 发送寄存器地址
+    I2C1->DR = register_address;
+    while (!(I2C1->SR1 & I2C_SR1_TXE));  // 等待数据寄存器空
+
+    // 发送数据
+    for (uint16_t i = 0; i < length; i++)
+    {
+        Hard_I2C_Write(device_address, register_address + i, data[i]);
+    }
+
+    // 生成停止条件
+    I2C1->CR1 |= I2C_CR1_STOP;
+}
+
+// 硬件IIC连续读函数
+void Hard_I2C_Read_Multiple(uint8_t device_address, uint8_t register_address, uint8_t* data, uint16_t length)
+{
+    for (uint16_t i = 0; i < length; i++)
+    {
+        data[i] = Hard_I2C_Read(device_address, register_address + i);
+    }
+}

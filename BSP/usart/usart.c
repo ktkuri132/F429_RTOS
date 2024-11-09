@@ -352,6 +352,7 @@ void USART1_IRQHandler()
     }
 }
 
+// 待添加的命令
 char* cmd[20] = 
 {
     "hello","reboot","poweroff"
@@ -374,7 +375,7 @@ char* USART_Deal(uint8_t point_note)
     {
         if(i==19)
         {
-            return "error";
+            return "command not found!";
         }
     }
 

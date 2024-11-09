@@ -5,7 +5,6 @@
 #include <usart.h>
 #include <sys.h>
 
-extern uint8_t UART_End;
 
 void usart_send_test();
 void led_test();
@@ -18,7 +17,7 @@ int main()
     // 串口发送测试
     //usart_send_test();
     // 串口接收测试
-    usart_receive_test();
+    //usart_receive_test();
     // LED测试
     //led_test();
 }
