@@ -54,8 +54,11 @@ C_DEFS += -DSTM32F429_439xx
 # C sources
 
 C_SOURCES = $(wildcard USER/*.c)
+
 C_SOURCES += $(wildcard CORE/*.c)
 
+C_SOURCES += $(wildcard BSP/gpio/*.c)
+C_SOURCES += $(wildcard BSP/systick/*.c)
 #C_SOURCES += $(wildcard SYSTEM/delay/*.c)
 #C_SOURCES += $(wildcard SYSTEM/sys/*.c)
 #C_SOURCES += $(wildcard SYSTEM/usart/*.c)
@@ -73,6 +76,8 @@ C_SOURCES += $(wildcard CORE/*.c)
 
 # C includes
 C_INCLUDES =  -ICORE/
+C_INCLUDES += -IBSP/gpio/
+C_INCLUDES += -IBSP/systick/
 #C_INCLUDES += -ILibraries/CMSIS/include/
 #C_INCLUDES += -ILibraries/STM32F4xx_StdPeriph_Driver/inc/
 

@@ -31,7 +31,7 @@
     
   .syntax unified
   .cpu cortex-m4
-  .fpu softvfp
+  .fpu softvfp 
   .thumb
 
 .global  g_pfnVectors
@@ -96,7 +96,7 @@ LoopFillZerobss:
   bl  SystemInit   
 /* Call the application's entry point.*/
   bl  main
-  bx  lr    
+  bl  Reset_Handler    
 .size  Reset_Handler, .-Reset_Handler
 
 /**

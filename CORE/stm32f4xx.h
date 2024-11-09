@@ -6,38 +6,15 @@
  extern "C" {
 #endif /* __cplusplus */
   
-/** @addtogroup Library_configuration_section
-  * @{
-  */
-  
-/* Uncomment the line below according to the target STM32 device used in your
-   application 
-  */
 #define STM32F429_439xx
+         
+// 外部高速晶振频率
+#define HSE_VALUE    ((uint32_t)25000000) 
 
-
-
-/**
- * @brief In the following line adjust the value of External High Speed oscillator (HSE)
-   used in your application 
-   
-   Tip: To avoid modifying this file each time you need to use different HSE, you
-        can define the HSE value in your toolchain compiler preprocessor.
-  */           
- 
-  #define HSE_VALUE    ((uint32_t)25000000) /*!< Value of the External oscillator in Hz */
-
-/**
- * @brief In the following line adjust the External High Speed oscillator (HSE) Startup 
-   Timeout value 
-   */
-#if !defined  (HSE_STARTUP_TIMEOUT) 
-  #define HSE_STARTUP_TIMEOUT    ((uint16_t)0x05000)   /*!< Time out for HSE start up */
-#endif /* HSE_STARTUP_TIMEOUT */   
-
-#if !defined  (HSI_VALUE)   
-  #define HSI_VALUE    ((uint32_t)16000000) /*!< Value of the Internal oscillator in Hz*/
-#endif /* HSI_VALUE */   
+// 外部高速晶振启动超时时间
+#define HSE_STARTUP_TIMEOUT    ((uint16_t)0x05000)   
+// 内部高速晶振频率
+#define HSI_VALUE    ((uint32_t)16000000) 
 
 /**
  * @brief STM32F4XX Standard Peripherals Library version number V1.8.0
@@ -71,6 +48,7 @@
 /**
  * @brief STM32F4XX Interrupt Number Definition, according to the selected device 
  *        in @ref Library_configuration_section 
+ *        stm32中断号定义
  */
 typedef enum IRQn
 {
@@ -433,7 +411,7 @@ typedef struct
 } DMA_TypeDef;
  
 /** 
-  * @brief DMA2D Controller
+  * @brief DMA2D Controller  stm32?GPU
   */
 
 typedef struct
@@ -570,7 +548,7 @@ typedef struct
 
 #if defined(STM32F427_437xx) || defined(STM32F429_439xx) || defined(STM32F446xx) || defined(STM32F469_479xx)
 /** 
-  * @brief Flexible Memory Controller
+  * @brief Flexible Memory Controller   ??NOR/PSRAM
   */
 
 typedef struct
@@ -579,7 +557,7 @@ typedef struct
 } FMC_Bank1_TypeDef; 
 
 /** 
-  * @brief Flexible Memory Controller Bank1E
+  * @brief Flexible Memory Controller Bank1E    NOR/PSRAM
   */
   
 typedef struct
@@ -588,7 +566,7 @@ typedef struct
 } FMC_Bank1E_TypeDef;
 
 /** 
-  * @brief Flexible Memory Controller Bank2
+  * @brief Flexible Memory Controller Bank2   NAND Flash
   */
   
 typedef struct
@@ -602,7 +580,7 @@ typedef struct
 } FMC_Bank2_TypeDef;
 
 /** 
-  * @brief Flexible Memory Controller Bank3
+  * @brief Flexible Memory Controller Bank3   NAND Flash
   */
   
 typedef struct
@@ -616,7 +594,7 @@ typedef struct
 } FMC_Bank3_TypeDef;
 
 /** 
-  * @brief Flexible Memory Controller Bank4
+  * @brief Flexible Memory Controller Bank4 PC Card
   */
   
 typedef struct
@@ -629,7 +607,7 @@ typedef struct
 } FMC_Bank4_TypeDef; 
 
 /** 
-  * @brief Flexible Memory Controller Bank5_6
+  * @brief Flexible Memory Controller Bank5_6  SDRAM
   */
   
 typedef struct
@@ -668,19 +646,9 @@ typedef struct
   __IO uint32_t MEMRMP;       /*!< SYSCFG memory remap register,                      Address offset: 0x00      */
   __IO uint32_t PMC;          /*!< SYSCFG peripheral mode configuration register,     Address offset: 0x04      */
   __IO uint32_t EXTICR[4];    /*!< SYSCFG external interrupt configuration registers, Address offset: 0x08-0x14 */
-#if defined (STM32F410xx) || defined(STM32F412xG) || defined(STM32F413_423xx)
-  uint32_t      RESERVED;     /*!< Reserved, 0x18                                                               */
-  __IO uint32_t CFGR2;        /*!< Reserved, 0x1C                                                               */
-  __IO uint32_t CMPCR;        /*!< SYSCFG Compensation cell control register,         Address offset: 0x20      */
-  uint32_t      RESERVED1[2]; /*!< Reserved, 0x24-0x28                                                          */
-  __IO uint32_t CFGR;         /*!< SYSCFG Configuration register,                     Address offset: 0x2C      */
-#else  /* STM32F40_41xxx || STM32F427_437xx || STM32F429_439xx || STM32F401xx || STM32F411xE || STM32F446xx || STM32F469_479xx */
   uint32_t      RESERVED[2];  /*!< Reserved, 0x18-0x1C                                                          */ 
   __IO uint32_t CMPCR;        /*!< SYSCFG Compensation cell control register,         Address offset: 0x20      */
-#endif /* STM32F410xx || defined(STM32F412xG) || defined(STM32F413_423xx) */
-#if defined(STM32F413_423xx)
-  __IO uint32_t MCHDLYCR;     /*!< SYSCFG multi-channel delay register,               Address offset: 0x30      */
-#endif /* STM32F413_423xx */
+
 } SYSCFG_TypeDef;
 
 /** 
@@ -1111,7 +1079,7 @@ typedef struct
   * @}
   */
   
-/** @addtogroup ?????
+/** @addtogroup 存储器映射
   * @{
   */
 #define FLASH_BASE            ((uint32_t)0x08000000) /*!< FLASH(up to 1 MB) base address in the alias region                         */
@@ -1267,7 +1235,7 @@ typedef struct
   * @}
   */
   
-/** @addtogroup ?????????
+/** @addtogroup 
   * @{
   */
 #define TIM2                ((TIM_TypeDef *) TIM2_BASE)
