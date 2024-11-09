@@ -25,7 +25,10 @@
         "jy61_usart6.h": "c",
         "freertos.h": "c",
         "timers.h": "c",
-        "task.h": "c"
+        "task.h": "c",
+        "inv_mpu.h": "c",
+        "mpu6050.h": "c",
+        "systick.h": "c"
     },
     "MicroPython.executeButton": [
         {

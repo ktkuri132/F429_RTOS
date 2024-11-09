@@ -5,12 +5,13 @@
 #include <OLED_Data.h>
 #include <stdarg.h>
 
-/* 外部接口头文件  */
-#include <i2clib.h>
+/* 外部驱动头文件  */
+#include <hardi2c.h>
 
-#define OLED_I2C_PORT i2c1
-#define OLED_SCL 3
-#define OLED_SDA 2
+/* 定义IIC端口  */
+//#define OLED_I2C_PORT i2c1
+#define OLED_SCL SCL
+#define OLED_SDA SDA
 
 /* 定义1.3寸OLED地址及其寄存器  */
 #define OLED_ADDRESS 0x3C //7位OLED地址  stm32上OLED的IIC地址为0x78
@@ -18,9 +19,9 @@
 #define OLED_Command_Mode 0x00
 
 /* 江科大OLED IIC操作接口   */
-#define OLED_WriteCommand(Command) IIC_WriteCommand(OLED_I2C_PORT,OLED_ADDRESS,OLED_Command_Mode,Command)
-#define OLED_WriteData(Data,Count) IIC_WriteData(OLED_I2C_PORT,OLED_ADDRESS,OLED_Data_Mode,Data,Count)
-#define OLED_GPIO_Init(port,scl,sda) IIC_GPIO_Init(port,scl,sda)
+#define OLED_WriteCommand(Command) Hard_I2C_Write(OLED_ADDRESS,OLED_Command_Mode,Command)
+#define OLED_WriteData(Data,Count) Hard_I2C_Write_Multiple(OLED_ADDRESS,OLED_Data_Mode,Data,Count)
+#define OLED_GPIO_Init() Hard_I2C_Init()
 
 /*FontSize参数取值*/
 /*此参数值不仅用于判断，而且用于计算横向字符偏移，默认值为字体像素宽度*/

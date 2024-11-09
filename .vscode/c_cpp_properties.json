@@ -9,7 +9,9 @@
                 "${workspaceFolder}/BSP/systick",
                 "${workspaceFolder}/RTOS/include",
                 "${workspaceFolder}/RTOS/portable/ARM_CM4F",
-                "${workspaceFolder}/BSP/usart"
+                "${workspaceFolder}/BSP/usart",
+                "${workspaceFolder}/HARDWARE/OLED",
+                "${workspaceFolder}/BSP/i2c"
             ],
             "defines": [
                 "STM32F429_439xx"

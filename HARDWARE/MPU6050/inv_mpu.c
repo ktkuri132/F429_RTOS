@@ -51,7 +51,7 @@
 
 #define i2c_write   MPU_Write_Len
 #define i2c_read    MPU_Read_Len
-#define delay_ms    sleep_ms
+#define delay_ms    bsp_systick_delay_ms
 #define get_ms      mget_ms
 //static inline int reg_int_cb(struct int_param_s *int_param)
 //{
@@ -761,7 +761,7 @@ int mpu_read_reg(unsigned char reg, unsigned char *data)
 int mpu_init(void)
 {
     unsigned char data[6], rev;
-
+    
     /* Reset device. */
     data[0] = BIT_RESET;
     if (i2c_write(st.hw->addr, st.reg->pwr_mgmt_1, 1, data))
@@ -772,11 +772,12 @@ int mpu_init(void)
     data[0] = 0x00;
     if (i2c_write(st.hw->addr, st.reg->pwr_mgmt_1, 1, data))
         return -1;
-
+    
 #if defined MPU6050
     /* Check product revision. */
     if (i2c_read(st.hw->addr, st.reg->accel_offs, 6, data))
         return -1;
+        
     rev = ((data[5] & 0x01) << 2) | ((data[3] & 0x01) << 1) |
         (data[1] & 0x01);
 
@@ -2953,10 +2954,13 @@ void mget_ms(unsigned long *time)
 //    其他,失败
 u8 mpu_dmp_init(void)
 {
+    
 	u8 res=0;
 	MPU_IIC_Init(); 	//初始化IIC总线
+    
 	if(mpu_init()==0)	//初始化MPU6050
 	{	 
+        
 		res=mpu_set_sensors(INV_XYZ_GYRO|INV_XYZ_ACCEL);//设置所需要的传感器
 		if(res)return 1; 
 		res=mpu_configure_fifo(INV_XYZ_GYRO|INV_XYZ_ACCEL);//设置FIFO
@@ -2973,7 +2977,7 @@ u8 mpu_dmp_init(void)
 		if(res)return 6; 
 		res=dmp_set_fifo_rate(DEFAULT_MPU_HZ);	//设置DMP输出速率(最大不超过200Hz)
 		if(res)return 7;   
-		res=run_self_test();		//自检
+		//res=run_self_test();		//自检
 	//	if(res)return 8;    
 		res=mpu_set_dmp_state(1);	//使能DMP
 		if(res)return 9;     

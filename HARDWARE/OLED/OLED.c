@@ -9,7 +9,7 @@ uint8_t OLED_DisplayBuf[8][128];
 void OLED_Init()
 {
 
-    OLED_GPIO_Init(OLED_I2C_PORT, OLED_SCL, OLED_SDA);
+    OLED_GPIO_Init();
 
     OLED_WriteCommand(0xAE);	//关闭显示
 	OLED_WriteCommand(0x20);	//设置内存地址模式
