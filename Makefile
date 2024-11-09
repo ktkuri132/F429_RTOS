@@ -57,8 +57,11 @@ C_SOURCES = $(wildcard USER/*.c)
 
 C_SOURCES += $(wildcard CORE/*.c)
 
+C_SOURCES += $(wildcard BSP/*.c)
 C_SOURCES += $(wildcard BSP/gpio/*.c)
 C_SOURCES += $(wildcard BSP/systick/*.c)
+C_SOURCES += $(wildcard BSP/usart/*.c)
+
 C_SOURCES += $(wildcard RTOS/*.c)
 C_SOURCES += $(wildcard RTOS/portable/ARM_CM4F/*.c)
 C_SOURCES += $(wildcard RTOS/portable/MemMang/*.c)
@@ -79,8 +82,12 @@ C_SOURCES += $(wildcard RTOS/portable/MemMang/*.c)
 
 # C includes
 C_INCLUDES =  -ICORE/
+
+C_INCLUDES += -IBSP/
 C_INCLUDES += -IBSP/gpio/
 C_INCLUDES += -IBSP/systick/
+C_INCLUDES += -IBSP/usart/
+
 C_INCLUDES += -IRTOS/
 C_INCLUDES += -IRTOS/portable/ARM_CM4F/
 C_INCLUDES += -IRTOS/include/

@@ -8,12 +8,13 @@
                 "${workspaceFolder}/BSP/gpio",
                 "${workspaceFolder}/BSP/systick",
                 "${workspaceFolder}/RTOS/include",
-                "${workspaceFolder}/RTOS/portable/ARM_CM4F"
+                "${workspaceFolder}/RTOS/portable/ARM_CM4F",
+                "${workspaceFolder}/BSP/usart"
             ],
             "defines": [
                 "STM32F429_439xx"
             ],
-            "compilerPath": "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.3 rel1/bin/arm-none-eabi-gcc.exe",
+            "compilerPath": "/home/ktkuri/arm-gcc-tools/bin/arm-none-eabi-gcc",
             "intelliSenseMode": "gcc-arm",
             "cStandard": "c99",
             "cppStandard": "c++17"

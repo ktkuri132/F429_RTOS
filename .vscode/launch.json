@@ -11,7 +11,7 @@
             "request": "launch",
             "type": "cortex-debug",
             //"runToEntryPoint": "main",
-            "armToolchainPath": "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.3 rel1/bin",
+            "armToolchainPath": "/home/ktkuri/arm-gcc-tools/bin",
             "showDevDebugOutput": "vscode",
             "servertype": "openocd",
             "configFiles": [
