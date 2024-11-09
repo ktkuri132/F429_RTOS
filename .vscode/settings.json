@@ -22,7 +22,9 @@
         "guilib.h": "c",
         "stm32f4xx_gpio.h": "c",
         "stm32f4xx_conf.h": "c",
-        "jy61_usart6.h": "c"
+        "jy61_usart6.h": "c",
+        "freertos.h": "c",
+        "timers.h": "c"
     },
     "MicroPython.executeButton": [
         {

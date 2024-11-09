@@ -98,6 +98,10 @@
 #define SYS_GPIO_PIN15              1<<15
 
 void bsp_gpio_init(GPIO_TypeDef *GPIOx, uint32_t PINx, uint32_t mode, uint32_t otype, uint32_t ospeed, uint32_t pupd);
+
+void GPIO_Set(GPIO_TypeDef* GPIOx,u32 BITx,u32 MODE,u32 OTYPE,u32 OSPEED,u32 PUPD);
+
+
 void bsp_gpio_af_set(GPIO_TypeDef *GPIOx, uint16_t PINx, uint8_t AFx);
 void bsp_gpio_pin_set(GPIO_TypeDef *GPIOx, uint16_t PINx, uint8_t status);
 uint8_t bsp_gpio_pin_get(GPIO_TypeDef *GPIOx, uint16_t PINx);

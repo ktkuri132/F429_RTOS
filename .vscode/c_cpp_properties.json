@@ -6,7 +6,9 @@
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/CORE",
                 "${workspaceFolder}/BSP/gpio",
-                "${workspaceFolder}/BSP/systick"
+                "${workspaceFolder}/BSP/systick",
+                "${workspaceFolder}/RTOS/include",
+                "${workspaceFolder}/RTOS/portable/ARM_CM4F"
             ],
             "defines": [
                 "STM32F429_439xx"
