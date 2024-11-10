@@ -94,6 +94,7 @@ uint8_t Hard_I2C_Write(uint8_t device_address, uint8_t register_address, uint8_t
 // 硬件IIC连续写函数
 uint8_t Hard_I2C_Write_Multiple(uint8_t device_address, uint8_t register_address, uint8_t* data, uint8_t length)
 {
+    
     // 生成起始条件
     I2C1->CR1 |= I2C_CR1_START;
     while (!(I2C1->SR1 & I2C_SR1_SB));  // 等待起始条件生成完毕
@@ -120,9 +121,17 @@ uint8_t Hard_I2C_Write_Multiple(uint8_t device_address, uint8_t register_address
     return 0;
 }
 
+uint8_t __Hard_I2C_Write_Multiple(uint8_t device_address, uint8_t register_address, uint8_t length,uint8_t* data)
+{
+    
+   Hard_I2C_Write_Multiple(device_address,register_address,data,length);
+   return 0;
+}
+
 // 硬件IIC连续读函数
 uint8_t Hard_I2C_Read_Multiple(uint8_t device_address, uint8_t register_address, uint8_t* data, uint16_t length)
 {
+    
     // 生成起始条件
     I2C1->CR1 |= I2C_CR1_START;
     while (!(I2C1->SR1 & I2C_SR1_SB));  // 等待起始条件生成完毕
@@ -144,19 +153,28 @@ uint8_t Hard_I2C_Read_Multiple(uint8_t device_address, uint8_t register_address,
     I2C1->DR = (device_address << 1) | 1;
     while (!(I2C1->SR1 & I2C_SR1_ADDR));  // 等待地址发送完毕
     (void)I2C1->SR2;  // 清除ADDR标志
-PBout(0)=0;
-    // 读取数据
-    for (uint16_t i = 0; i < length; i++)
+
+    uint16_t i = 0;
+    for (i = 0; i < length; i++)
     {
+        
+        while (!(I2C1->SR1 & I2C_SR1_RXNE));  // 等待数据接收完毕
+        data[i] = I2C1->DR;
         if (i == length - 1)
         {
             I2C1->CR1 &= ~I2C_CR1_ACK;  // 禁用ACK
+            // 倒数第1个字节时，生成停止条件
+            I2C1->CR1 |= I2C_CR1_STOP;  // 生成停止条件
         }
-        while (!(I2C1->SR1 & I2C_SR1_RXNE));  // 等待数据接收完毕
-        data[i] = I2C1->DR;
+        //printf("length:%d,i=%d\n", length, i);
     }
 
-    // 生成停止条件
-    I2C1->CR1 |= I2C_CR1_STOP;
     return 0;
+}
+
+
+
+uint8_t __Hard_I2C_Read_Multiple(uint8_t device_address, uint8_t register_address,  uint16_t length,uint8_t* data)
+{
+    return Hard_I2C_Read_Multiple(device_address,register_address,data,length);
 }
