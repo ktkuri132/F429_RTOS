@@ -5,14 +5,18 @@
 #include <usart.h>
 #include <sys.h>
 #include <OLED.h>
-#include <mpu6050.h>
-#include <inv_mpu.h>
+
+#include "sdram.h"
+#include "gt9xxx.h"
+#include "ltdc.h"
+#include "lcd.h"
+#include "touch.h"
 
 void usart_send_test();
 void led_test();
 void usart_receive_test();
 void OLED_test();
-void MPU6050_test();
+void LCD_test();
 
 
 int main()
@@ -27,11 +31,33 @@ int main()
     // OLED测试
     //OLED_test();
     // MPU6050测试
-    MPU6050_test();
+    //MPU6050_test();
+    // LCD测试
+    LCD_test();
 
 }
 
+
+/*
+    失败，傻逼库
+*/
+void LCD_test()
+{
+    bsp_usart_1_inti(115200);
+    SDRAM_Init();
+    LCD_Init();
+    gt9xxx_init();
+    while (1)
+    {
+        Printf(0,0,240,32,32,1,"hello,world");
+    }
+    
+}
+
+/*
 float Roll,Pitch,Yaw;
+
+    用不了，傻逼库
 
 void MPU6050_test()
 {
@@ -53,7 +79,7 @@ void MPU6050_test()
     }
 
 }
-
+*/
 void OLED_test()
 {
     // OLED初始化
@@ -62,7 +88,7 @@ void OLED_test()
     while (1)
     {
         // OLED显示
-        OLED_Printf(0, 0, OLED_8X16,"hello world! ");
+        OLED_Printf(0, 0, OLED_8X16,"hello,world");
         // OLED更新
         OLED_Update();
     }

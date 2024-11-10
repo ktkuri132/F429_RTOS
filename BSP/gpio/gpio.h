@@ -99,7 +99,7 @@
 
 void bsp_gpio_init(GPIO_TypeDef *GPIOx, uint32_t PINx, uint32_t mode, uint32_t otype, uint32_t ospeed, uint32_t pupd);
 
-void GPIO_Set(GPIO_TypeDef* GPIOx,u32 BITx,u32 MODE,u32 OTYPE,u32 OSPEED,u32 PUPD);
+//void GPIO_Set(GPIO_TypeDef* GPIOx,u32 BITx,u32 MODE,u32 OTYPE,u32 OSPEED,u32 PUPD);
 
 
 void bsp_gpio_af_set(GPIO_TypeDef *GPIOx, uint16_t PINx, uint8_t AFx);

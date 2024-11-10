@@ -22,9 +22,9 @@ void Hard_I2C_Init()
     
     // 配置I2C1
     I2C1->CR1 &= ~I2C_CR1_PE;   // 关闭I2C1
-    I2C1->CR2 = 42;             // APB1时钟42M
-    I2C1->CCR = 210;            // 速率为100K
-    I2C1->TRISE = 43;           // 最大的I2C时钟周期为1000ns
+    I2C1->CR2 = 45;             // APB1时钟45M
+    I2C1->CCR = 38;            // 速率为400K
+    I2C1->TRISE = 46;           // 最大的I2C时钟周期为1000ns
     I2C1->CR1 |= I2C_CR1_PE;    // 使能I2C1
 }
 
@@ -157,7 +157,6 @@ uint8_t Hard_I2C_Read_Multiple(uint8_t device_address, uint8_t register_address,
     uint16_t i = 0;
     for (i = 0; i < length; i++)
     {
-        
         while (!(I2C1->SR1 & I2C_SR1_RXNE));  // 等待数据接收完毕
         data[i] = I2C1->DR;
         if (i == length - 1)
@@ -166,7 +165,6 @@ uint8_t Hard_I2C_Read_Multiple(uint8_t device_address, uint8_t register_address,
             // 倒数第1个字节时，生成停止条件
             I2C1->CR1 |= I2C_CR1_STOP;  // 生成停止条件
         }
-        //printf("length:%d,i=%d\n", length, i);
     }
 
     return 0;

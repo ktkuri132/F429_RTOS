@@ -64,7 +64,11 @@ C_SOURCES += $(wildcard BSP/usart/*.c)
 C_SOURCES += $(wildcard BSP/i2c/*.c)
 
 C_SOURCES += $(wildcard HARDWARE/OLED/*.c)
-C_SOURCES += $(wildcard HARDWARE/MPU6050/*.c)
+C_SOURCES += $(wildcard HARDWARE/LCD/*.c)
+C_SOURCES += $(wildcard HARDWARE/SDRAM/*.c)
+C_SOURCES += $(wildcard HARDWARE/TOUCH/*.c)
+
+#C_SOURCES += $(wildcard HARDWARE/MPU6050/*.c)
 
 C_SOURCES += $(wildcard RTOS/*.c)
 C_SOURCES += $(wildcard RTOS/portable/ARM_CM4F/*.c)
@@ -94,7 +98,11 @@ C_INCLUDES += -IBSP/usart/
 C_INCLUDES += -IBSP/i2c/
 
 C_INCLUDES += -IHARDWARE/OLED/
-C_INCLUDES += -IHARDWARE/MPU6050/
+C_INCLUDES += -IHARDWARE/LCD/
+C_INCLUDES += -IHARDWARE/SDRAM/
+C_INCLUDES += -IHARDWARE/TOUCH/
+
+#C_INCLUDES += -IHARDWARE/MPU6050/
 
 C_INCLUDES += -IRTOS/
 C_INCLUDES += -IRTOS/portable/ARM_CM4F/
