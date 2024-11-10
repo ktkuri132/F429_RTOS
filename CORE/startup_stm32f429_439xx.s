@@ -36,7 +36,7 @@
 
 .global  g_pfnVectors
 .global  Default_Handler
-
+.global Reset_Handler
 /* start address for the initialization values of the .data section. 
 defined in linker script */
 .word  _sidata
