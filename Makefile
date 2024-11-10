@@ -263,6 +263,7 @@ rebuild_run:
 	make clean
 	make -j20 
 	make dol
+	arm-none-eabi-objdump -D -S -m cortex-m3 ./${BUILD_DIR}/$(TARGET).elf > ./${BUILD_DIR}/$(TARGET).dis
 	echo "program is running......"
 build_run:
 	make -j20 

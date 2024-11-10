@@ -46,16 +46,15 @@ void LCD_test()
     bsp_usart_1_inti(115200);
     //SDRAM_Init();
     int* a = (int*)0x08000000;
-    int* b = (int*)main;
-    int* c = (int*)0x08000000;
-    //*a = 0x12345678;
+    int* b = main;
+    int* c = (int*)0x08001414;
     
     //LCD_Init();
     //gt9xxx_init();
     while (1)
     {
         //Printf(0,0,240,32,32,1,"hello,world");
-        printf("%x,%x,%x\n",*a,*b,*c);
+        printf("%x,%x,%x\n",*a,*(int*)(b),*c);
     }
     
 }
