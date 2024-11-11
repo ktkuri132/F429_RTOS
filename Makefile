@@ -68,6 +68,8 @@ C_SOURCES += $(wildcard HARDWARE/LCD/*.c)
 C_SOURCES += $(wildcard HARDWARE/SDRAM/*.c)
 C_SOURCES += $(wildcard HARDWARE/TOUCH/*.c)
 
+C_SOURCES += $(wildcard GUI/*.c)
+
 #C_SOURCES += $(wildcard HARDWARE/MPU6050/*.c)
 
 C_SOURCES += $(wildcard RTOS/*.c)
@@ -85,7 +87,7 @@ C_SOURCES += $(wildcard RTOS/portable/MemMang/*.c)
 #C_SOURCES += $(wildcard Lib/src/*.c)
 
 # C++ sources
-#CXX_SOURCES = $(wildcard Lib/src/*.cpp)
+CXX_SOURCES = $(wildcard GUI/*.cpp)
 
 
 # C includes
@@ -101,6 +103,8 @@ C_INCLUDES += -IHARDWARE/OLED/
 C_INCLUDES += -IHARDWARE/LCD/
 C_INCLUDES += -IHARDWARE/SDRAM/
 C_INCLUDES += -IHARDWARE/TOUCH/
+
+C_INCLUDES += -IGUI/
 
 #C_INCLUDES += -IHARDWARE/MPU6050/
 
@@ -123,7 +127,7 @@ C_INCLUDES += -IRTOS/include/
 #C_INCLUDES += -ILib/inc/
 
 # C++ includes
-CXX_INCLUDES =
+CXX_INCLUDES = -IGUI/
 
 # ASM includes
 # AS defines

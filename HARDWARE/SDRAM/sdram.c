@@ -43,49 +43,49 @@ void SDRAM_Init(void)
 	bsp_gpio_init(GPIOF,0X3F<<0|0X1F<<11,SYS_GPIO_MODE_AF,SYS_GPIO_OTYPE_PP,SYS_GPIO_SPEED_HIGH,SYS_GPIO_PUPD_PU);		//PG0~5/11~15					
 	bsp_gpio_init(GPIOG,7<<0|3<<4|SYS_GPIO_PIN8|SYS_GPIO_PIN15,SYS_GPIO_MODE_AF,SYS_GPIO_OTYPE_PP,SYS_GPIO_SPEED_HIGH,SYS_GPIO_PUPD_PU);	//PF0~2/4/5/8/15				
  
- 	bsp_gpio_af_set(GPIOC,0,12);	//PC0,AF12
- 	bsp_gpio_af_set(GPIOC,2,12);	//PC2,AF12
- 	bsp_gpio_af_set(GPIOC,3,12);	//PC3,AF12
+ 	bsp_gpio_af_set(GPIOC,SYS_GPIO_PIN0,12);	//PC0,AF12
+ 	bsp_gpio_af_set(GPIOC,SYS_GPIO_PIN2,12);	//PC2,AF12
+ 	bsp_gpio_af_set(GPIOC,SYS_GPIO_PIN3,12);	//PC3,AF12
 	
- 	bsp_gpio_af_set(GPIOD,0,12);	//PD0,AF12 
- 	bsp_gpio_af_set(GPIOD,1,12);	//PD1,AF12 
- 	bsp_gpio_af_set(GPIOD,8,12);	//PD8,AF12
- 	bsp_gpio_af_set(GPIOD,9,12);	//PD9,AF12
- 	bsp_gpio_af_set(GPIOD,10,12);	//PD10,AF12  
- 	bsp_gpio_af_set(GPIOD,14,12);	//PD14,AF12
- 	bsp_gpio_af_set(GPIOD,15,12);	//PD15,AF12
+ 	bsp_gpio_af_set(GPIOD,SYS_GPIO_PIN0,12);	//PD0,AF12 
+ 	bsp_gpio_af_set(GPIOD,SYS_GPIO_PIN1,12);	//PD1,AF12 
+ 	bsp_gpio_af_set(GPIOD,SYS_GPIO_PIN8,12);	//PD8,AF12
+ 	bsp_gpio_af_set(GPIOD,SYS_GPIO_PIN9,12);	//PD9,AF12
+ 	bsp_gpio_af_set(GPIOD,SYS_GPIO_PIN10,12);	//PD10,AF12  
+ 	bsp_gpio_af_set(GPIOD,SYS_GPIO_PIN14,12);	//PD14,AF12
+ 	bsp_gpio_af_set(GPIOD,SYS_GPIO_PIN15,12);	//PD15,AF12
 	
- 	bsp_gpio_af_set(GPIOE,0,12);	//PE0,AF12 
- 	bsp_gpio_af_set(GPIOE,1,12);	//PE1,AF12 
- 	bsp_gpio_af_set(GPIOE,7,12);	//PE7,AF12
- 	bsp_gpio_af_set(GPIOE,8,12);	//PE8,AF12
- 	bsp_gpio_af_set(GPIOE,9,12);	//PE9,AF12
- 	bsp_gpio_af_set(GPIOE,10,12);	//PE10,AF12
- 	bsp_gpio_af_set(GPIOE,11,12);	//PE11,AF12
- 	bsp_gpio_af_set(GPIOE,12,12);	//PE12,AF12
- 	bsp_gpio_af_set(GPIOE,13,12);	//PE13,AF12
- 	bsp_gpio_af_set(GPIOE,14,12);	//PE14,AF12
- 	bsp_gpio_af_set(GPIOE,15,12);	//PE15,AF12
+ 	bsp_gpio_af_set(GPIOE,SYS_GPIO_PIN0,12);	//PE0,AF12 
+ 	bsp_gpio_af_set(GPIOE,SYS_GPIO_PIN1,12);	//PE1,AF12 
+ 	bsp_gpio_af_set(GPIOE,SYS_GPIO_PIN7,12);	//PE7,AF12
+ 	bsp_gpio_af_set(GPIOE,SYS_GPIO_PIN8,12);	//PE8,AF12
+ 	bsp_gpio_af_set(GPIOE,SYS_GPIO_PIN9,12);	//PE9,AF12
+ 	bsp_gpio_af_set(GPIOE,SYS_GPIO_PIN10,12);	//PE10,AF12
+ 	bsp_gpio_af_set(GPIOE,SYS_GPIO_PIN11,12);	//PE11,AF12
+ 	bsp_gpio_af_set(GPIOE,SYS_GPIO_PIN12,12);	//PE12,AF12
+ 	bsp_gpio_af_set(GPIOE,SYS_GPIO_PIN13,12);	//PE13,AF12
+ 	bsp_gpio_af_set(GPIOE,SYS_GPIO_PIN14,12);	//PE14,AF12
+ 	bsp_gpio_af_set(GPIOE,SYS_GPIO_PIN15,12);	//PE15,AF12
 
- 	bsp_gpio_af_set(GPIOF,0,12);	//PF0,AF12 
- 	bsp_gpio_af_set(GPIOF,1,12);	//PF1,AF12 
- 	bsp_gpio_af_set(GPIOF,2,12);	//PF2,AF12
- 	bsp_gpio_af_set(GPIOF,3,12);	//PF3,AF12
- 	bsp_gpio_af_set(GPIOF,4,12);	//PF4,AF12
- 	bsp_gpio_af_set(GPIOF,5,12);	//PF5,AF12
- 	bsp_gpio_af_set(GPIOF,11,12);	//PF11,AF12
- 	bsp_gpio_af_set(GPIOF,12,12);	//PF12,AF12
- 	bsp_gpio_af_set(GPIOF,13,12);	//PF13,AF12
- 	bsp_gpio_af_set(GPIOF,14,12);	//PF14,AF12
- 	bsp_gpio_af_set(GPIOF,15,12);	//PF15,AF12
+ 	bsp_gpio_af_set(GPIOF,SYS_GPIO_PIN0,12);	//PF0,AF12 
+ 	bsp_gpio_af_set(GPIOF,SYS_GPIO_PIN1,12);	//PF1,AF12 
+ 	bsp_gpio_af_set(GPIOF,SYS_GPIO_PIN2,12);	//PF2,AF12
+ 	bsp_gpio_af_set(GPIOF,SYS_GPIO_PIN3,12);	//PF3,AF12
+ 	bsp_gpio_af_set(GPIOF,SYS_GPIO_PIN4,12);	//PF4,AF12
+ 	bsp_gpio_af_set(GPIOF,SYS_GPIO_PIN5,12);	//PF5,AF12
+ 	bsp_gpio_af_set(GPIOF,SYS_GPIO_PIN11,12);	//PF11,AF12
+ 	bsp_gpio_af_set(GPIOF,SYS_GPIO_PIN12,12);	//PF12,AF12
+ 	bsp_gpio_af_set(GPIOF,SYS_GPIO_PIN13,12);	//PF13,AF12
+ 	bsp_gpio_af_set(GPIOF,SYS_GPIO_PIN14,12);	//PF14,AF12
+ 	bsp_gpio_af_set(GPIOF,SYS_GPIO_PIN15,12);	//PF15,AF12
 	
- 	bsp_gpio_af_set(GPIOG,0,12);	//PG0,AF12 
- 	bsp_gpio_af_set(GPIOG,1,12);	//PG1,AF12 
- 	bsp_gpio_af_set(GPIOG,2,12);	//PG2,AF12
- 	bsp_gpio_af_set(GPIOG,4,12);	//PG4,AF12
- 	bsp_gpio_af_set(GPIOG,5,12);	//PG5,AF12  
- 	bsp_gpio_af_set(GPIOG,8,12);	//PG8,AF12
- 	bsp_gpio_af_set(GPIOG,15,12);	//PG15,AF12	
+ 	bsp_gpio_af_set(GPIOG,SYS_GPIO_PIN0,12);	//PG0,AF12 
+ 	bsp_gpio_af_set(GPIOG,SYS_GPIO_PIN1,12);	//PG1,AF12 
+ 	bsp_gpio_af_set(GPIOG,SYS_GPIO_PIN2,12);	//PG2,AF12
+ 	bsp_gpio_af_set(GPIOG,SYS_GPIO_PIN4,12);	//PG4,AF12
+ 	bsp_gpio_af_set(GPIOG,SYS_GPIO_PIN5,12);	//PG5,AF12  
+ 	bsp_gpio_af_set(GPIOG,SYS_GPIO_PIN8,12);	//PG8,AF12
+ 	bsp_gpio_af_set(GPIOG,SYS_GPIO_PIN15,12);	//PG15,AF12	
     
  	sdctrlreg|=1<<0;				//9位列地址
 	sdctrlreg|=2<<2;				//13位行地址

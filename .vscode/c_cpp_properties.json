@@ -11,7 +11,8 @@
                 "${workspaceFolder}/RTOS/portable/ARM_CM4F",
                 "${workspaceFolder}/BSP/usart",
                 "${workspaceFolder}/HARDWARE/OLED",
-                "${workspaceFolder}/BSP/i2c"
+                "${workspaceFolder}/BSP/i2c",
+                "${workspaceFolder}/GUI"
             ],
             "defines": [
                 "STM32F429_439xx"

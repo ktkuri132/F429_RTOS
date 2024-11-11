@@ -106,7 +106,11 @@ void bsp_gpio_af_set(GPIO_TypeDef *GPIOx, uint16_t PINx, uint8_t AFx);
 void bsp_gpio_pin_set(GPIO_TypeDef *GPIOx, uint16_t PINx, uint8_t status);
 uint8_t bsp_gpio_pin_get(GPIO_TypeDef *GPIOx, uint16_t PINx);
 
-
+/*
+    兼容版的GPIO操作函数
+*/
+void GPIO_Set(GPIO_TypeDef* GPIOx,u32 BITx,u32 MODE,u32 OTYPE,u32 OSPEED,u32 PUPD);
+void GPIO_AF_Set(GPIO_TypeDef* GPIOx,u8 BITx,u8 AFx);
 
 
 

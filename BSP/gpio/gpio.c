@@ -133,3 +133,12 @@ uint8_t bsp_gpio_pin_get(GPIO_TypeDef *GPIOx, uint16_t PINx)
     }
 }
 
+/*
+    专门用来兼容SDRAM的GPIO操作
+*/
+void GPIO_AF_Set(GPIO_TypeDef* GPIOx,u8 BITx,u8 AFx)
+{  
+	GPIOx->AFR[BITx>>3]&=~(0X0F<<((BITx&0X07)*4));
+	GPIOx->AFR[BITx>>3]|=(u32)AFx<<((BITx&0X07)*4);
+} 
+

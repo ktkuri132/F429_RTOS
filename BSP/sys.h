@@ -15,6 +15,8 @@
 #include "lcd.h"
 #include "touch.h"
 
+#include <lcd_gui.h>
+
 void NVIC_Configuration(void);
 
 

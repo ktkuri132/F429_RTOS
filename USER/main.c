@@ -1,16 +1,4 @@
-#include <stm32f4xx.h>
-#include <gpio.h>
-#include <systick.h>
-#include <FreeRTOS.h>
-#include <usart.h>
 #include <sys.h>
-#include <OLED.h>
-
-#include "sdram.h"
-#include "gt9xxx.h"
-#include "ltdc.h"
-#include "lcd.h"
-#include "touch.h"
 
 void usart_send_test();
 void led_test();
@@ -34,29 +22,69 @@ int main()
     //MPU6050_test();
     // LCD测试
     LCD_test();
-
 }
 
-void Reset_Handler();
-/*
-    失败，傻逼库
-*/
+uint8_t act_sign_1,act_sign_2;
 void LCD_test()
 {
+    NVIC_Configuration();
     bsp_usart_1_inti(115200);
-    //SDRAM_Init();
-    int* a = (int*)0x08000000;
-    int* b = main;
-    int* c = (int*)0x08001414;
     
-    //LCD_Init();
-    //gt9xxx_init();
+    SDRAM_Init();
+    LCD_Init();
+    gt9xxx_init();
+    LCD_EXTI_Configuration();
     while (1)
     {
+        //tp_dev.scan(0);     //读坐标
+        //Button_check(&act_sign_1,0,360,250,100,50,"Enter");
+        //Button_check(&act_sign_2,1,520,250,100,50,"Esc");
         //Printf(0,0,240,32,32,1,"hello,world");
-        printf("%x,%x,%x\n",*a,*(int*)(b),*c);
+        //printf("%x,%x\n",*a,*b);
     }
     
+}
+
+
+
+void EXTI9_5_IRQHandler(void)
+{
+    // Check if EXTI_Line7 is asserted
+    if (EXTI->PR & EXTI_PR_PR7)
+    {
+        tp_dev.scan(0);     //读坐标
+        Button_check(&act_sign_1,0,360,250,100,50,"Enter");
+        Button_check(&act_sign_2,1,520,250,100,50,"Esc");
+        // Clear the EXTI line pending bit
+        EXTI->PR = EXTI_PR_PR7;
+    }
+}
+
+int a;
+
+void button_response(uint8_t *act_sign)
+{
+    switch (*act_sign)
+    {
+        case 0:
+        {
+            a +=2;
+            Printf(0,64,240,32,32,0,"a:%d",a); 
+            printf("%d\r\n",a);
+        }   
+        break;
+        
+        case 1:
+        {
+            a--;
+            Printf(0,64,240,32,32,0,"a:%d",a); 
+            printf("%d\r\n",a);
+        }
+        break;
+        default:
+            break;
+    }
+
 }
 
 /*
@@ -85,6 +113,8 @@ void MPU6050_test()
 
 }
 */
+
+
 void OLED_test()
 {
     // OLED初始化

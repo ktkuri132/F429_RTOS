@@ -346,29 +346,29 @@ void LTDC_Init(void)
 	bsp_gpio_init(GPIOH,0X7F<<9,SYS_GPIO_MODE_AF,SYS_GPIO_OTYPE_PP,SYS_GPIO_SPEED_HIGH,SYS_GPIO_PUPD_PU);			//PH9~15
 	bsp_gpio_init(GPIOI,7<<0|0XF<<4|3<<9,SYS_GPIO_MODE_AF,SYS_GPIO_OTYPE_PP,SYS_GPIO_SPEED_HIGH,SYS_GPIO_PUPD_PU);	//PI0~2/4~7/9/10
 	 
- 	bsp_gpio_af_set(GPIOF,10,14);		//PF10,AF14
+ 	bsp_gpio_af_set(GPIOF,SYS_GPIO_PIN10,14);		//PF10,AF14
 	
- 	bsp_gpio_af_set(GPIOG,6,14);		//PG6,AF14
- 	bsp_gpio_af_set(GPIOG,7,14);		//PG7,AF14
- 	bsp_gpio_af_set(GPIOG,11,14);		//PG11,AF14
+ 	bsp_gpio_af_set(GPIOG,SYS_GPIO_PIN6,14);		//PG6,AF14
+ 	bsp_gpio_af_set(GPIOG,SYS_GPIO_PIN7,14);		//PG7,AF14
+ 	bsp_gpio_af_set(GPIOG,SYS_GPIO_PIN11,14);		//PG11,AF14
 	
- 	bsp_gpio_af_set(GPIOH,9,14);		//PH9,AF14
- 	bsp_gpio_af_set(GPIOH,10,14);		//PH10,AF14
- 	bsp_gpio_af_set(GPIOH,11,14);		//PH11,AF14
- 	bsp_gpio_af_set(GPIOH,12,14);		//PH12,AF14
- 	bsp_gpio_af_set(GPIOH,13,14);		//PH13,AF14
- 	bsp_gpio_af_set(GPIOH,14,14);		//PH14,AF14
- 	bsp_gpio_af_set(GPIOH,15,14);		//PH15,AF14
+ 	bsp_gpio_af_set(GPIOH,SYS_GPIO_PIN9,14);		//PH9,AF14
+ 	bsp_gpio_af_set(GPIOH,SYS_GPIO_PIN10,14);		//PH10,AF14
+ 	bsp_gpio_af_set(GPIOH,SYS_GPIO_PIN11,14);		//PH11,AF14
+ 	bsp_gpio_af_set(GPIOH,SYS_GPIO_PIN12,14);		//PH12,AF14
+ 	bsp_gpio_af_set(GPIOH,SYS_GPIO_PIN13,14);		//PH13,AF14
+ 	bsp_gpio_af_set(GPIOH,SYS_GPIO_PIN14,14);		//PH14,AF14
+ 	bsp_gpio_af_set(GPIOH,SYS_GPIO_PIN15,14);		//PH15,AF14
 	
- 	bsp_gpio_af_set(GPIOI,0,14);		//PI0,AF14
- 	bsp_gpio_af_set(GPIOI,1,14);		//PI1,AF14
- 	bsp_gpio_af_set(GPIOI,2,14);		//PI2,AF14
- 	bsp_gpio_af_set(GPIOI,4,14);		//PI4,AF14
- 	bsp_gpio_af_set(GPIOI,5,14);		//PI5,AF14
- 	bsp_gpio_af_set(GPIOI,6,14);		//PI6,AF14
- 	bsp_gpio_af_set(GPIOI,7,14);		//PI7,AF14
- 	bsp_gpio_af_set(GPIOI,9,14);		//PI9,AF14
- 	bsp_gpio_af_set(GPIOI,10,14);		//PI10,AF14 
+ 	bsp_gpio_af_set(GPIOI,SYS_GPIO_PIN0,14);		//PI0,AF14
+ 	bsp_gpio_af_set(GPIOI,SYS_GPIO_PIN1,14);		//PI1,AF14
+ 	bsp_gpio_af_set(GPIOI,SYS_GPIO_PIN2,14);		//PI2,AF14
+ 	bsp_gpio_af_set(GPIOI,SYS_GPIO_PIN4,14);		//PI4,AF14
+ 	bsp_gpio_af_set(GPIOI,SYS_GPIO_PIN5,14);		//PI5,AF14
+ 	bsp_gpio_af_set(GPIOI,SYS_GPIO_PIN6,14);		//PI6,AF14
+ 	bsp_gpio_af_set(GPIOI,SYS_GPIO_PIN7,14);		//PI7,AF14
+ 	bsp_gpio_af_set(GPIOI,SYS_GPIO_PIN9,14);		//PI9,AF14
+ 	bsp_gpio_af_set(GPIOI,SYS_GPIO_PIN10,14);		//PI10,AF14 
 	
 	
 		lcdltdc.pwidth=1024;		//面板宽度,单位:像素

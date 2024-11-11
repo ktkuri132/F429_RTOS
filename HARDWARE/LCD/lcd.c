@@ -179,15 +179,7 @@ void LCD_Init(void)
 	{
 		LTDC_Init();				//ID非零,说明有RGB屏接入. 
 	}
-	//初始化完成以后,提速
-	if(lcddev.id==0X9341||lcddev.id==0X5310||lcddev.id==0X5510||lcddev.id==0X1963)//如果是这几个IC,则设置WR时序为最快
-	{
-		//重新配置写时序控制寄存器的时序   	 							    
-		FMC_Bank1E->BWTR[0]&=~(0XF<<0);	//地址建立时间(ADDSET)清零 	 
-		FMC_Bank1E->BWTR[0]&=~(0XF<<8);	//数据保存时间清零
-		FMC_Bank1E->BWTR[0]|=4<<0;	 	//地址建立时间(ADDSET)为4个HCLK =21ns  	 
-		FMC_Bank1E->BWTR[0]|=4<<8; 		//数据保存时间(DATAST)为5.2ns*4个HCLK=21ns
-	} 
+	
 	LCD_Display_Dir(1);		//默认为竖屏
 	LCD_LED=1;				//点亮背光
 	LCD_Clear(WHITE);
