@@ -11,27 +11,26 @@ void LCD_test();
 TaskHandle_t StartTask_Handler;
 TaskHandle_t LCD_test_Handler;
 TaskHandle_t USART_test_Handler;
+TaskHandle_t LED_Handler;
 
 void StartTask(void *pvParameters)
 {
     taskENTER_CRITICAL();
-    xTaskCreate((TaskFunction_t)LCD_test, "LCD_test", 1024, NULL, 1, NULL);
-    xTaskCreate((TaskFunction_t)usart_receive_test, "USART_test", 1024, NULL, 1, NULL);
-    xTaskCreate((TaskFunction_t)led_test, "LED_test", 1024, NULL, 1, NULL);
-    vTaskDelay(StartTask_Handler);
+    NVIC_Configuration();
+    
+    
+    
+    //xTaskCreate((TaskFunction_t)LCD_test, "LCD_test", 1024, NULL, 1, &LCD_test_Handler);
+    xTaskCreate((TaskFunction_t)usart_receive_test, "USART_test", 1024, NULL, 2, &USART_test_Handler);
+    xTaskCreate((TaskFunction_t)led_test, "LED_test", 1024, NULL, 3, &LED_Handler);
+    vTaskDelete(StartTask_Handler);
     taskEXIT_CRITICAL();
 }
 
 int main()
 {
-    NVIC_Configuration();
-    bsp_usart_1_inti(115200);
     
     SDRAM_Init();
-    LCD_Init();
-    gt9xxx_init();
-    LCD_EXTI_Configuration();
-
     xTaskCreate((TaskFunction_t)StartTask, "StartTask", 1024, NULL, 1, &StartTask_Handler);
     vTaskStartScheduler();
     // 串口发送测试
@@ -52,6 +51,9 @@ uint8_t act_sign_1,act_sign_2;
 void LCD_test()
 {
     
+    LCD_Init();
+    gt9xxx_init();
+    //LCD_EXTI_Configuration();
     while (1)
     {
         tp_dev.scan(0);     //读坐标
@@ -62,7 +64,6 @@ void LCD_test()
     }
     
 }
-
 
 
 void EXTI9_5_IRQHandler(void)
@@ -128,11 +129,25 @@ void usart_receive_test()
     // 串口初始化
     bsp_usart_1_inti(115200);
     int hour=0,min=0,sec=0;
-    //printf("root@stm32:%s\r\n");
+    
     while (1)
     {   
-        printf("time:%d:%d:%d\r\n",hour,min,sec++);
+        printf("%d:%d:%d\r\n",hour,min,sec++);
         vTaskDelay(1000);
+        if(sec==60)
+        {
+            sec=0;
+            min++;
+            if(min==60)
+            {
+                min=0;
+                hour++;
+                if(hour==24)
+                {
+                    hour=0;
+                }
+            }
+        }
     }
 }
 
