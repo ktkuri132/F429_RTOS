@@ -48,7 +48,7 @@ ASMM_SOURCES =
 
 # C defines
 #C_DEFS =  -DUSE_STDPERIPH_DRIVER 
-C_DEFS += -DSTM32F429_439xx
+#C_DEFS += -DSTM32F429_439xx
 
 
 # C sources

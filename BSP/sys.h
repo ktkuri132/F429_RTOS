@@ -4,7 +4,7 @@
 #include <stm32f4xx.h>
 #include <gpio.h>
 #include <systick.h>
-#include <FreeRTOS.h>
+
 #include <usart.h>
 #include <sys.h>
 #include <OLED.h>

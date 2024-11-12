@@ -1,15 +1,39 @@
 #include <sys.h>
-
+#include <FreeRTOS.h>
+#include <task.h>
 void usart_send_test();
 void led_test();
 void usart_receive_test();
 void OLED_test();
 void LCD_test();
 
+// 创建任务句柄
+TaskHandle_t StartTask_Handler;
+TaskHandle_t LCD_test_Handler;
+TaskHandle_t USART_test_Handler;
+
+void StartTask(void *pvParameters)
+{
+    taskENTER_CRITICAL();
+    xTaskCreate((TaskFunction_t)LCD_test, "LCD_test", 1024, NULL, 1, NULL);
+    xTaskCreate((TaskFunction_t)usart_receive_test, "USART_test", 1024, NULL, 1, NULL);
+    xTaskCreate((TaskFunction_t)led_test, "LED_test", 1024, NULL, 1, NULL);
+    vTaskDelay(StartTask_Handler);
+    taskEXIT_CRITICAL();
+}
 
 int main()
 {
+    NVIC_Configuration();
+    bsp_usart_1_inti(115200);
     
+    SDRAM_Init();
+    LCD_Init();
+    gt9xxx_init();
+    LCD_EXTI_Configuration();
+
+    xTaskCreate((TaskFunction_t)StartTask, "StartTask", 1024, NULL, 1, &StartTask_Handler);
+    vTaskStartScheduler();
     // 串口发送测试
     //usart_send_test();
     // 串口接收测试
@@ -21,24 +45,18 @@ int main()
     // MPU6050测试
     //MPU6050_test();
     // LCD测试
-    LCD_test();
+    //LCD_test();
 }
 
 uint8_t act_sign_1,act_sign_2;
 void LCD_test()
 {
-    NVIC_Configuration();
-    bsp_usart_1_inti(115200);
     
-    SDRAM_Init();
-    LCD_Init();
-    gt9xxx_init();
-    LCD_EXTI_Configuration();
     while (1)
     {
-        //tp_dev.scan(0);     //读坐标
-        //Button_check(&act_sign_1,0,360,250,100,50,"Enter");
-        //Button_check(&act_sign_2,1,520,250,100,50,"Esc");
+        tp_dev.scan(0);     //读坐标
+        Button_check(&act_sign_1,0,360,250,100,50,"Enter");
+        Button_check(&act_sign_2,1,520,250,100,50,"Esc");
         //Printf(0,0,240,32,32,1,"hello,world");
         //printf("%x,%x\n",*a,*b);
     }
@@ -87,32 +105,6 @@ void button_response(uint8_t *act_sign)
 
 }
 
-/*
-float Roll,Pitch,Yaw;
-
-    用不了，傻逼库
-
-void MPU6050_test()
-{
-    RCC->AHB1ENR |= 1 << 1;
-    bsp_gpio_init(GPIOB, SYS_GPIO_PIN0, SYS_GPIO_MODE_OUT, SYS_GPIO_OTYPE_PP, SYS_GPIO_SPEED_HIGH, SYS_GPIO_PUPD_NONE);
-    bsp_gpio_pin_set(GPIOB, SYS_GPIO_PIN0, 1);
-    
-    //PBout(0)=0;
-    bsp_usart_1_inti(115200);
-     ;//=mpu_init();
-    int a= mpu_dmp_init();
-    
-    while (1)
-    {
-        
-        //printf("a:%d\n",a);
-        //mpu_dmp_get_data(&Roll,&Pitch,&Yaw);
-        //printf("%f\n",Roll);
-    }
-
-}
-*/
 
 
 void OLED_test()
@@ -132,14 +124,15 @@ void OLED_test()
 void usart_receive_test()
 {
     // 中断初始化
-    NVIC_Configuration();
+    //NVIC_Configuration();
     // 串口初始化
     bsp_usart_1_inti(115200);
-
+    int hour=0,min=0,sec=0;
     //printf("root@stm32:%s\r\n");
     while (1)
     {   
-        
+        printf("time:%d:%d:%d\r\n",hour,min,sec++);
+        vTaskDelay(1000);
     }
 }
 
@@ -164,9 +157,11 @@ void led_test()
     while (1)
     {
         bsp_gpio_pin_set(GPIOB, SYS_GPIO_PIN0, 0);
-        bsp_systick_delay_ms(500);
+        vTaskDelay(500);
+        //bsp_systick_delay_ms(500);
         bsp_gpio_pin_set(GPIOB, SYS_GPIO_PIN0, 1);
-        bsp_systick_delay_ms(500);
+        vTaskDelay(500);
+        //bsp_systick_delay_ms(500);
     }
     
 }
