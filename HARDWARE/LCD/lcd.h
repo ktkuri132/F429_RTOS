@@ -1,5 +1,7 @@
 #ifndef __LCD_H
 #define __LCD_H		
+#ifdef __LCD_GUI_
+
 #include <gpio.h>	 
 #include "stdlib.h" 
 #include <sys.h>
@@ -126,6 +128,8 @@ void LCD_Set_Window(u16 sx,u16 sy,u16 width,u16 height);	//设置窗口
 #define SSD_HPS	(SSD_HOR_BACK_PORCH)
 #define SSD_VT 	(SSD_VER_RESOLUTION+SSD_VER_BACK_PORCH+SSD_VER_FRONT_PORCH)
 #define SSD_VPS (SSD_VER_BACK_PORCH)
+
+#endif
 
 #endif  
 	 

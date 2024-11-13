@@ -36,6 +36,8 @@
 #include "systick.h"
 #include <sys.h>
 
+#ifdef __LCD_GUI_
+
 _m_tp_dev tp_dev =
 {
     tp_init,
@@ -303,7 +305,7 @@ uint8_t tp_init(void)
 
 
 
-
+#endif
 
 
 

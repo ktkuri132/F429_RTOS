@@ -37,6 +37,8 @@
 #include "systick.h"
 #include <sys.h>
 
+#ifdef __LCD_GUI_
+
 
 /* 注意: 除了GT9271支持10点触摸之外, 其他触摸芯片只支持 5点触摸 */
 uint8_t g_gt_tnum = 5;      /* 默认支持的触摸屏点数(5点触摸) */
@@ -298,7 +300,7 @@ void Read_SitData(uint8_t i)
 
 
 
-
+#endif
 
 
 

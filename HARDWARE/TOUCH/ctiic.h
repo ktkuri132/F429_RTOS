@@ -25,6 +25,8 @@
 #ifndef __CTIIC_H
 #define __CTIIC_H
 
+#ifdef __LCD_GUI_
+
 #include "sys.h"
 #include <gpio.h>
 
@@ -58,6 +60,8 @@ uint8_t ct_iic_wait_ack(void);      /* IIC等待ACK信号 */
 
 void ct_iic_send_byte(uint8_t txd);         /* IIC发送一个字节 */
 uint8_t ct_iic_read_byte(unsigned char ack);/* IIC读取一个字节 */
+
+#endif
 
 #endif
 

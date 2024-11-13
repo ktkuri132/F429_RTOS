@@ -31,6 +31,9 @@
 #ifndef __GT9XXX_H
 #define __GT9XXX_H
 
+
+#ifdef __LCD_GUI_
+
 #include "systick.h"
 #include <sys.h>
 
@@ -82,6 +85,16 @@ void gt9xxx_rd_reg(uint16_t reg, uint8_t *buf, uint8_t len);
 uint8_t gt9xxx_init(void);
 uint8_t gt9xxx_scan(uint8_t mode);
 void Read_SitData(uint8_t i);
+
+
+
+#endif
+
+
+
+
+
+
 #endif
 
 

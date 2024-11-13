@@ -27,6 +27,8 @@
 #include <gpio.h>
 #include <sys.h>
 
+#ifdef __LCD_GUI_
+
 /**
  * @brief       控制I2C速度的延时
  * @param       无
@@ -216,7 +218,7 @@ uint8_t ct_iic_read_byte(unsigned char ack)
     return receive;
 }
 
-
+#endif
 
 
 

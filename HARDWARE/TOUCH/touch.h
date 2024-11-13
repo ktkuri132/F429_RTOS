@@ -31,6 +31,9 @@
 #ifndef __TOUCH_H
 #define __TOUCH_H
 
+
+#ifdef __LCD_GUI_
+
 #include "sys.h"
 #include "gt9xxx.h"
 #include "ft5206.h"
@@ -124,6 +127,9 @@ static uint8_t tp_read_xy2(uint16_t *x, uint16_t *y);   /* ´ø¼ÓÇ¿ÂË²¨µÄË«·½Ïò×ø±
 
 uint8_t tp_init(void);              /* ³õÊ¼»¯ */
 uint8_t tp_scan(uint8_t mode);      /* É¨Ãè */
+
+
+#endif
 
 #endif
 

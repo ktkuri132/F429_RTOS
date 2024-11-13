@@ -30,8 +30,11 @@
 #include "ctiic.h"
 #include "ft5206.h"
 #include "usart.h"
+
 #include <systick.h>
 #include <sys.h>
+
+#ifdef __LCD_GUI_
 
 /**
  * @brief       向FT5206写入一次数据
@@ -218,7 +221,7 @@ uint8_t ft5206_scan(uint8_t mode)
 }
 
 
-
+#endif
 
 
 

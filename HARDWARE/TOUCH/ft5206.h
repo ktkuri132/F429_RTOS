@@ -28,6 +28,8 @@
 #ifndef __FT5206_H
 #define __FT5206_H
 
+#ifdef __LCD_GUI_
+
 #include <gpio.h>
 #include <sys.h>
 
@@ -75,6 +77,9 @@ uint8_t ft5206_wr_reg(uint16_t reg, uint8_t *buf, uint8_t len);
 void ft5206_rd_reg(uint16_t reg, uint8_t *buf, uint8_t len);
 uint8_t ft5206_init(void);
 uint8_t ft5206_scan(uint8_t mode);
+
+
+#endif
 
 #endif
 
