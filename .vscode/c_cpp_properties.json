@@ -13,7 +13,7 @@
             "defines": [
                 "STM32F429_439xx"
             ],
-            "compilerPath": "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.3 rel1/bin/arm-none-eabi-gcc.exe",
+            "compilerPath": "/usr/bin/arm-none-eabi-gcc",
             "intelliSenseMode": "gcc-arm",
             "cStandard": "c99",
             "cppStandard": "c++17"
