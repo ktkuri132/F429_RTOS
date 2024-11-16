@@ -13,7 +13,7 @@
             "defines": [
                 "STM32F429_439xx"
             ],
-            "compilerPath": "/usr/bin/arm-none-eabi-gcc",
+            "compilerPath": "/home/ktkuri/arm-tools/bin/arm-none-eabi-gcc",
             "intelliSenseMode": "gcc-arm",
             "cStandard": "c99",
             "cppStandard": "c++17"
