@@ -12,7 +12,7 @@ TaskHandle_t StartTask_Handler;
 TaskHandle_t LCD_test_Handler;
 TaskHandle_t USART_test_Handler;
 TaskHandle_t LED_Handler;
-
+TaskHandle_t OLED_Handler;
 
 // 创建动态任务
 void StartTask(void *pvParameters)
@@ -21,8 +21,9 @@ void StartTask(void *pvParameters)
     NVIC_Configuration();
     
     //xTaskCreate((TaskFunction_t)LCD_test, "LCD_test", 1024, NULL, 1, &LCD_test_Handler);
-    xTaskCreate((TaskFunction_t)usart_receive_test, "USART_test", 1024, NULL, 2, &USART_test_Handler);
-    xTaskCreate((TaskFunction_t)led_test, "LED_test", 1024, NULL, 3, &LED_Handler);
+    xTaskCreate((TaskFunction_t)usart_receive_test, "USART_test", 500, NULL, 2, &USART_test_Handler);
+    xTaskCreate((TaskFunction_t)OLED_test, "OLED_test", 500, NULL, 3, &OLED_Handler);
+    xTaskCreate((TaskFunction_t)led_test, "LED_test", 500, NULL, 3, &LED_Handler);
     vTaskDelete(StartTask_Handler);
     taskEXIT_CRITICAL();
 }
@@ -72,14 +73,14 @@ int main()
     
     SDRAM_Init();
     // 创建动态任务
-    //xTaskCreate((TaskFunction_t)StartTask, "StartTask", 1024, NULL, 1, &StartTask_Handler);
-    //vTaskStartScheduler();
+    xTaskCreate((TaskFunction_t)StartTask, "StartTask", 1024, NULL, 1, &StartTask_Handler);
+    vTaskStartScheduler();
 
     
     //创建静态任务   栈内存真几把神奇
-    xTaskCreateStatic((TaskFunction_t)led_test,"led",45,NULL,1,led_Task_TaskTCB,led_Task_Static);
-    xTaskCreateStatic((TaskFunction_t)usart_receive_test,"usart",21,NULL,1,usart_Task_TaskTCB,usart_Task_Static);
-    vTaskStartScheduler();
+    //xTaskCreateStatic((TaskFunction_t)led_test,"led",45,NULL,1,led_Task_TaskTCB,led_Task_Static);
+    //xTaskCreateStatic((TaskFunction_t)usart_receive_test,"usart",21,NULL,1,usart_Task_TaskTCB,usart_Task_Static);
+    //vTaskStartScheduler();
 
     // 串口发送测试
     //usart_send_test();
