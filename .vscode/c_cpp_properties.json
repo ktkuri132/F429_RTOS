@@ -12,7 +12,8 @@
                 "${workspaceFolder}/BSP/usart",
                 "${workspaceFolder}/HARDWARE/OLED",
                 "${workspaceFolder}/BSP/i2c",
-                "${workspaceFolder}/GUI"
+                "${workspaceFolder}/GUI",
+                "${workspaceFolder}/HARDWARE/SDRAM"
             ],
             "defines": [
                 "STM32F429_439xx"

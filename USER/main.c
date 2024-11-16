@@ -20,8 +20,6 @@ void StartTask(void *pvParameters)
     taskENTER_CRITICAL();
     NVIC_Configuration();
     
-    
-    
     //xTaskCreate((TaskFunction_t)LCD_test, "LCD_test", 1024, NULL, 1, &LCD_test_Handler);
     xTaskCreate((TaskFunction_t)usart_receive_test, "USART_test", 1024, NULL, 2, &USART_test_Handler);
     xTaskCreate((TaskFunction_t)led_test, "LED_test", 1024, NULL, 3, &LED_Handler);

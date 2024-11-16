@@ -10,8 +10,8 @@
             "name": "Debug-F4",
             "request": "launch",
             "type": "cortex-debug",
-            //"runToEntryPoint": "main",
-            "armToolchainPath": "/home/ktkuri/arm-gcc-tools/bin",
+            "runToEntryPoint": "main",
+            "armToolchainPath": "/home/ktkuri/arm-tools/bin",
             "showDevDebugOutput": "vscode",
             "servertype": "openocd",
             "configFiles": [
